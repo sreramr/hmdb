@@ -22,6 +22,7 @@
       become: yes
       vars:
         ansible_python_interpreter: /usr/bin/python3
+      delegate_to: localhost
 
     - name: Create employee in MySQL
       community.mysql.mysql_query:
