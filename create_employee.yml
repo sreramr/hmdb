@@ -24,7 +24,7 @@
         ansible_python_interpreter: /usr/bin/python3
 
     - name: Create employee in MySQL
-      community.mysql.mysql_query:
+      mysql_query:
         login_host: "{{ mysql_hostname }}"
         login_port: "{{ mysql_port }}"
         login_user: "{{ mysql_root_user }}"
