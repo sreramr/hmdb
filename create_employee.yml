@@ -1,5 +1,5 @@
 ---
-- name: Create employee in MySQL
+- name: Ensure required MySQL Python module is installed and create employee in MySQL
   hosts: wsl
   collections:
     - community.mysql
@@ -15,6 +15,14 @@
       lastname: rathnam
       email: sreramrathnam@gmail.com
   tasks:
+    - name: Install PyMySQL for Python 3
+      pip:
+        name: PyMySQL
+        state: present
+      become: yes
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+
     - name: Create employee in MySQL
       community.mysql.mysql_query:
         login_host: "{{ mysql_hostname }}"
