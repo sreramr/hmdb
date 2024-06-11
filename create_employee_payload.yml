@@ -1,0 +1,34 @@
+---
+- name: Ensure required MySQL Python module is installed and create employee in MySQL
+  hosts: wsl_localhost
+  collections:
+    - community.mysql
+  vars:
+    mysql_hostname: localhost
+    mysql_port: 3306
+    mysql_root_user: root
+    mysql_root_password: rootpassword
+    mysql_db_name: ai_users
+    mysql_table_name: employee
+    firstname: "{{ firstname | default('') }}"
+    lastname: "{{ lastname | default('') }}"
+    email: "{{ email | default('') }}"
+  tasks:
+    - name: Install PyMySQL for Python 3
+      pip:
+        name: PyMySQL
+        state: present
+      become: yes
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+
+    - name: Create employee in MySQL
+      mysql_query:
+        login_host: "{{ mysql_hostname }}"
+        login_port: "{{ mysql_port }}"
+        login_user: "{{ mysql_root_user }}"
+        login_password: "{{ mysql_root_password }}"
+        login_db: "{{ mysql_db_name }}"
+        query: >
+          INSERT INTO {{ mysql_table_name }} (firstname, lastname, email)
+          VALUES ('{{ firstname }}', '{{ lastname }}', '{{ email }}')
