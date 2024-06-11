@@ -28,4 +28,4 @@
         login_db: "{{ mysql_db_name }}"
         query: >
           INSERT INTO {{ mysql_table_name }} (firstname, lastname, email)
-          VALUES ('{{ employee_data.firstname }}', '{{ employee_data.lastname }}', '{{ employee_data.email }}')
+          VALUES ('{{ firstname }}', '{{ lastname }}', '{{ email }}')
