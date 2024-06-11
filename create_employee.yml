@@ -1,6 +1,6 @@
 ---
 - name: Ensure required MySQL Python module is installed and create employee in MySQL
-  hosts: wsl
+  hosts: wsl_localhost
   collections:
     - community.mysql
   vars:
