@@ -1,6 +1,6 @@
 ---
 - name: Ensure required MySQL Python module is installed and create employee in MySQL
-  hosts: 	wsl_localhost
+  hosts: wsl_localhost
   collections:
     - community.mysql
   vars:
@@ -10,6 +10,10 @@
     mysql_root_password: rootpassword
     mysql_db_name: ai_users
     mysql_table_name: employee
+    employee_data:
+      firstname: "{{ firstname }}"
+      lastname: "{{ lastname }}"
+      email: "{{ email }}"
   tasks:
     - name: Install PyMySQL for Python 3
       pip:
@@ -28,10 +32,4 @@
         login_db: "{{ mysql_db_name }}"
         query: >
           INSERT INTO {{ mysql_table_name }} (firstname, lastname, email)
-          VALUES ('{{ item.firstname }}', '{{ item.lastname }}', '{{ item.email }}')
-      loop: "{{ employees }}"
-      vars:
-        employees:
-          - firstname: "{{ firstname }}"
-            lastname: "{{ lastname }}"
-            email: "{{ email }}"
+          VALUES ('{{ employee_data.firstname }}', '{{ employee_data.lastname }}', '{{ employee_data.email }}')
