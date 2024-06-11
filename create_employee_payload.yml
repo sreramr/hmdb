@@ -29,3 +29,7 @@
         query: >
           INSERT INTO {{ mysql_table_name }} (firstname, lastname, email)
           VALUES ('{{ firstname }}', '{{ lastname }}', '{{ email }}')
+      vars:
+        firstname: "{{ firstname }}"
+        lastname: "{{ lastname }}"
+        email: "{{ email }}"
