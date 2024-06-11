@@ -30,7 +30,4 @@
           INSERT INTO {{ mysql_table_name }} (firstname, lastname, email)
           VALUES ('{{ employee_data.firstname }}', '{{ employee_data.lastname }}', '{{ employee_data.email }}')
       vars:
-        employee_data:
-          firstname: "{{ firstname }}"
-          lastname: "{{ lastname }}"
-          email: "{{ email }}"
+        employee_data: "{{ employee_data }}"
