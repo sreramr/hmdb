@@ -10,16 +10,16 @@
     mysql_root_password: root
     mysql_db_name: hmdb_test
     mysql_table_name: users
+    ansible_python_interpreter: /usr/bin/python3.8
 
   tasks:
     - name: Install PyMySQL for Python 3
       pip:
         name: PyMySQL
         state: present
-      become: yes
       vars:
-        ansible_python_interpreter: /usr/bin/python3.8
-        
+        ansible_python_interpreter: "{{ ansible_python_interpreter }}"
+
     - name: Query all users in MySQL
       mysql_query:
         login_host: "{{ mysql_hostname }}"
