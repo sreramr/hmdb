@@ -18,7 +18,7 @@
         name: PyMySQL
         state: present
       vars:
-        ansible_python_interpreter: "{{ ansible_python_interpreter }}"
+        ansible_python_interpreter: /usr/bin/python3
 
     - name: Query all users in MySQL
       mysql_query:
