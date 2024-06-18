@@ -10,7 +10,7 @@
     mysql_root_password: root
     mysql_db_name: hmdb_test
     mysql_table_name: users
-    ansible_python_interpreter: /usr/bin/python3.8
+    ansible_python_interpreter: /usr/bin/python3
 
   tasks:
     - name: Install PyMySQL for Python 3
