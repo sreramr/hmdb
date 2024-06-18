@@ -12,7 +12,14 @@
     mysql_table_name: users
 
   tasks:
-  
+    - name: Install PyMySQL for Python 3
+      pip:
+        name: PyMySQL
+        state: present
+      become: yes
+      vars:
+        ansible_python_interpreter: /usr/bin/python3.8
+        
     - name: Query all users in MySQL
       mysql_query:
         login_host: "{{ mysql_hostname }}"
