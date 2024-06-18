@@ -1,0 +1,35 @@
+---
+- name: Ensure required MySQL Python module is installed and query all users in MySQL
+  hosts: localhost
+  collections:
+    - community.mysql
+  vars:
+    mysql_hostname: localhost
+    mysql_port: 3306
+    mysql_root_user: root
+    mysql_root_password: root
+    mysql_db_name: hmdb_test
+    mysql_table_name: users
+
+  tasks:
+    - name: Install PyMySQL for Python 3
+      pip:
+        name: PyMySQL
+        state: present
+      become: yes
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+
+    - name: Query all users in MySQL
+      mysql_query:
+        login_host: "{{ mysql_hostname }}"
+        login_port: "{{ mysql_port }}"
+        login_user: "{{ mysql_root_user }}"
+        login_password: "{{ mysql_root_password }}"
+        login_db: "{{ mysql_db_name }}"
+        query: "SELECT * FROM {{ mysql_table_name }}"
+      register: query_result
+
+    - name: Output query results
+      debug:
+        var: query_result.results
