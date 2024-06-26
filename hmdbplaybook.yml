@@ -6,8 +6,8 @@
   vars:
     mysql_hostname: 10.2.77.103
     mysql_port: 3306
-    mysql_root_user: powerbi_hmdb
-    mysql_root_password: powerbi@123
+    mysql_root_user: discover_node
+    mysql_root_password: discover@123
     mysql_db_name: hmdb_test
     mysql_table_name: discover_node
     employee_data:
