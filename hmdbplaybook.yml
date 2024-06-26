@@ -9,7 +9,11 @@
     mysql_root_user: powerbi_hmdb
     mysql_root_password: powerbi@123
     mysql_db_name: hmdb_test
-    mysql_table_name: users
+    mysql_table_name: discover_node
+    employee_data:
+      firstname: sreram
+      lastname: rathnam
+      email: sre.ram.r@bd.com
     ansible_python_interpreter: /usr/bin/python3
 
   tasks:
@@ -27,7 +31,8 @@
         login_user: "{{ mysql_root_user }}"
         login_password: "{{ mysql_root_password }}"
         login_db: "{{ mysql_db_name }}"
-        query: "SELECT * FROM {{ mysql_table_name }}"
+        query: "INSERT INTO {{ mysql_table_name }} (firstname, lastname, email)
+          VALUES ('{{ employee_data.firstname }}', '{{ employee_data.lastname }}', '{{ employee_data.email }}')"
       register: query_result
 
     - name: Output query results
