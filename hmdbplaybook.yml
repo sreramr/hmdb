@@ -11,9 +11,12 @@
     mysql_db_name: hmdb_test
     mysql_table_name: discover_node
     employee_data:
-      firstname: "{{ firstname }}"
-      lastname: "{{ lastname }}"
-      email: "{{ email }}"
+      orion_node_ip_address: "{{ orion_node_ip_address }}"
+      orion_node_caption_name: "{{ orion_node_caption_name }}" 
+      orion_node_polling_method: "{{ orion_node_polling_method }}"
+      orion_node_sys_name: "{{ orion_node_sys_name }}"
+      orion_node_machine_name: "{{ orion_node_machine_name }}"
+      orion_node_vendor_name: "{{ orion_node_vendor_name }}"
     ansible_python_interpreter: /usr/bin/python3
 
   tasks:
@@ -31,8 +34,8 @@
         login_user: "{{ mysql_root_user }}"
         login_password: "{{ mysql_root_password }}"
         login_db: "{{ mysql_db_name }}"
-        query: "INSERT INTO {{ mysql_table_name }} (firstname, lastname, email)
-          VALUES ('{{ employee_data.firstname }}', '{{ employee_data.lastname }}', '{{ employee_data.email }}')"
+        query: "INSERT INTO {{ mysql_table_name }} (orion_node_ip_address, orion_node_caption_name, orion_node_polling_method, orion_node_sys_name, orion_node_machine_name, orion_node_vendor_name)
+          VALUES ('{{ employee_data.orion_node_ip_address }}', '{{ employee_data.orion_node_caption_name }}', '{{ employee_data.orion_node_polling_method }}', '{{ employee_data.orion_node_sys_name }}', '{{ employee_data.orion_node_machine_name }}', '{{ employee_data.orion_node_vendor_name }}')"
       register: query_result
 
     - name: Output query results
