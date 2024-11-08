@@ -1,6 +1,6 @@
 ---
 - name: Ensure required MySQL Python module is installed and query all users in MySQL
-  hosts: localhost
+  hosts: servers
   collections:
     - community.mysql
   vars:
