@@ -4,6 +4,7 @@
   collections:
     - community.mysql
   vars:
+    ansible_python_interpreter: /usr/bin/python3
     mysql_hostname: 10.2.77.103
     mysql_port: 3306
     mysql_root_user: discover_node
@@ -20,13 +21,6 @@
     ansible_python_interpreter: /usr/bin/python3
 
   tasks:
-    - name: Install PyMySQL for Python 3
-      pip:
-        name: PyMySQL
-        state: present
-      vars:
-        ansible_python_interpreter: /usr/bin/python3
-
     - name: Query all users in MySQL
       mysql_query:
         login_host: "{{ mysql_hostname }}"
