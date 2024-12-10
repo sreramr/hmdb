@@ -4,7 +4,7 @@
   collections:
     - community.mysql
   vars:
-    ansible_python_interpreter: /usr/bin/python3.6
+    ansible_python_interpreter: /usr/bin/python3
     mysql_hostname: 10.2.77.103
     mysql_port: 3306
     mysql_root_user: discover_node
