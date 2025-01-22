@@ -18,7 +18,7 @@
       orion_node_sys_name: "{{ orion_node_caption_name }}"
       orion_node_machine_name: "{{ orion_node_machine_name }}"
       orion_node_vendor_name: "{{ orion_node_vendor_name }}"
-      orion_node_device_ExpiredContract: "{{ orion_node_device_ExpiredContract }}"
+      orion_node_device_warranty_expiry_date: "{{ orion_node_device_warranty_expiry_date }}"
     ansible_python_interpreter: /usr/bin/python3
 
   tasks:
@@ -29,8 +29,8 @@
         login_user: "{{ mysql_root_user }}"
         login_password: "{{ mysql_root_password }}"
         login_db: "{{ mysql_db_name }}"
-        query: "INSERT INTO {{ mysql_table_name }} (orion_node_ip_address, orion_node_caption_name, orion_node_polling_method, orion_node_sys_name, orion_node_machine_name, orion_node_vendor_name, orion_node_device_ExpiredContract)
-          VALUES ('{{ employee_data.orion_node_ip_address }}', '{{ employee_data.orion_node_caption_name }}', '{{ employee_data.orion_node_polling_method }}', '{{ employee_data.orion_node_sys_name }}', '{{ employee_data.orion_node_machine_name }}', '{{ employee_data.orion_node_vendor_name }}', '{{ employee_data.orion_node_device_ExpiredContract }}')"
+        query: "INSERT INTO {{ mysql_table_name }} (orion_node_ip_address, orion_node_caption_name, orion_node_polling_method, orion_node_sys_name, orion_node_machine_name, orion_node_vendor_name, orion_node_device_warranty_expiry_date)
+          VALUES ('{{ employee_data.orion_node_ip_address }}', '{{ employee_data.orion_node_caption_name }}', '{{ employee_data.orion_node_polling_method }}', '{{ employee_data.orion_node_sys_name }}', '{{ employee_data.orion_node_machine_name }}', '{{ employee_data.orion_node_vendor_name }}', '{{ employee_data.orion_node_device_warranty_expiry_date }}')"
       register: query_result
 
     - name: Output query results
