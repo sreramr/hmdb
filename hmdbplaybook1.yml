@@ -57,7 +57,7 @@
       orion_node_comments: "{{ orion_node_comments }}"
       orion_node_bau_handover_date: "{{ orion_node_bau_handover_date }}"
       orion_node_project_manager: "{{ orion_node_project_manager }}"
-      orion_node_approval_state: 3
+      orion_node_approval_state: "3"
     ansible_python_interpreter: /usr/bin/python3
 
   tasks:
