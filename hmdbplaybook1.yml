@@ -68,7 +68,6 @@
         login_password: "{{ mysql_root_password }}"
         login_db: "{{ mysql_db_name }}"
         query: "INSERT INTO {{ mysql_table_name }} (ip_address, hostname, ci_type, vendor_oem, warranty_expiry_date, domain, country, location, tower, track, serial_no, site_code, site_priority, vendor_hw_support_contract, implementation_date, tp_support_contract_start_date, tp_support_contract_end_date, model_no, os, status, cmdb_updated, cmdb_ci_category, app_owner_ci_category, application_name, application_owner, monitored, monitoring_tool, ci_owner, support_group, approval_group, source, source_reference, source_value, po_number, eosl_oem, eol_bd_contract, eol_oem, oem_support, comments, bau_handover_date, project_manager)
-
           VALUES
           (
             '{{ employee_data.orion_node_ip_address }}', '{{ employee_data.orion_node_caption_name }}', 
