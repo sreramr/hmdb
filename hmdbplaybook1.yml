@@ -57,7 +57,7 @@
       orion_node_comments: "{{ orion_node_comments }}"
       orion_node_bau_handover_date: "{{ orion_node_bau_handover_date }}"
       orion_node_project_manager: "{{ orion_node_project_manager }}"
-      orion_node_approval_state: "3"
+      orion_node_approval_state: 3
     ansible_python_interpreter: /usr/bin/python3
 
   tasks:
@@ -81,7 +81,7 @@
             '{{ employee_data.orion_node_application_owner }}', '{{ employee_data.orion_node_monitored }}', '{{ employee_data.orion_node_monitoring_tool }}', '{{ employee_data.orion_node_ci_owner }}', 
             '{{ employee_data.orion_node_support_group }}', '{{ employee_data.orion_node_approval_group }}', '{{ employee_data.orion_node_source }}', '{{ employee_data.orion_node_source_reference }}', 
             '{{ employee_data.orion_node_source_value }}', '{{ employee_data.orion_node_po_number }}', '{{ employee_data.orion_node_eosl_oem }}', '{{ employee_data.orion_node_eol_bd_contract }}', 
-            '{{ employee_data.orion_node_eol_oem }}', '{{ employee_data.orion_node_oem_support }}', '{{ employee_data.orion_node_comments }}', '{{ employee_data.orion_node_bau_handover_date }}', '{{ employee_data.orion_node_project_manager }}, '{{ employee_data.orion_node_approval_state }}'
+            '{{ employee_data.orion_node_eol_oem }}', '{{ employee_data.orion_node_oem_support }}', '{{ employee_data.orion_node_comments }}', '{{ employee_data.orion_node_bau_handover_date }}', '{{ employee_data.orion_node_project_manager }}', '{{ employee_data.orion_node_approval_state }}'
           )"
       register: query_result
 
