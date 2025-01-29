@@ -10,7 +10,7 @@
     mysql_root_user: discover_node
     mysql_root_password: discover@123
     mysql_db_name: hmdb_test
-    mysql_table_name: discover_node
+    mysql_table_name: all_sites
     employee_data:
       orion_node_ip_address: "{{ orion_node_ip_address }}"
       orion_node_caption_name: "{{ orion_node_caption_name }}" 
