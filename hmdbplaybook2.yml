@@ -1,0 +1,108 @@
+---
+- name: Ensure required MySQL Python module is installed and query all users in MySQL
+  hosts: fileserver
+  collections:
+    - community.mysql
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    mysql_hostname: 10.2.77.103
+    mysql_port: 3306
+    mysql_root_user: discover_node
+    mysql_root_password: discover@123
+    mysql_db_name: hmdb_test
+    mysql_table_name: all_sites
+    employee_data:
+      orion_node_ip_address: "{{ orion_node_ip_address }}"
+      orion_node_caption_name: "{{ orion_node_caption_name }}" 
+      orion_node_polling_method: "{{ orion_node_polling_method }}"
+      orion_node_sys_name: "{{ orion_node_sys_name }}"
+      orion_node_machine_name: "{{ orion_node_machine_name }}"
+      orion_node_vendor_name: "{{ orion_node_vendor_name }}"
+      orion_node_warranty_expiry_date: "{{ orion_node_warranty_expiry_date }}"
+      orion_node_vendor: "{{ orion_node_vendor }}"
+      orion_node_device_company: "{{ orion_node_device_company }}"
+      orion_node_device_criticality: "{{ orion_node_device_criticality }}"
+      orion_node_device_location: "{{ orion_node_device_location }}"
+      orion_node_remarks: "{{ orion_node_remarks }}"
+      orion_node_tower: "{{ orion_node_tower }}"
+      orion_node_track: "{{ orion_node_track }}"
+      orion_node_serial_no: "{{ orion_node_serial_no }}"
+      orion_node_site_code: "{{ orion_node_site_code }}"
+      orion_node_site_priority: "{{ orion_node_site_priority }}"
+      orion_node_vendor_hw_support_contract: "{{ orion_node_vendor_hw_support_contract }}"
+      orion_node_implementation_date: "{{ orion_node_implementation_date }}"
+      orion_node_tp_support_contract_start_date: "{{ orion_node_tp_support_contract_start_date }}"
+      orion_node_tp_support_contract_end_date: "{{ orion_node_tp_support_contract_end_date }}"
+      orion_node_model_no: "{{ orion_node_model_no }}"
+      orion_node_os: "{{ orion_node_os }}"
+      orion_node_status: "{{ orion_node_status }}"
+      orion_node_cmdb_updated: "{{ orion_node_cmdb_updated }}"
+      orion_node_cmdb_ci_category: "{{ orion_node_cmdb_ci_category }}"
+      orion_node_app_owner_ci_category: "{{ orion_node_app_owner_ci_category }}"
+      orion_node_application_name: "{{ orion_node_application_name }}"
+      orion_node_application_owner: "{{ orion_node_application_owner }}"
+      orion_node_monitored: "{{ orion_node_monitored }}"
+      orion_node_monitoring_tool: "{{ orion_node_monitoring_tool }}"
+      orion_node_ci_owner: "{{ orion_node_ci_owner }}"
+      orion_node_support_group: "{{ orion_node_support_group }}"
+      orion_node_approval_group: "{{ orion_node_approval_group }}"
+      orion_node_source: "{{ orion_node_source }}"
+      orion_node_source_reference: "{{ orion_node_source_reference }}"
+      orion_node_source_value: "{{ orion_node_source_value }}"
+      orion_node_po_number: "{{ orion_node_po_number }}"
+      orion_node_eosl_oem: "{{ orion_node_eosl_oem }}"
+      orion_node_eol_bd_contract: "{{ orion_node_eol_bd_contract }}"
+      orion_node_eol_oem: "{{ orion_node_eol_oem }}"
+      orion_node_oem_support: "{{ orion_node_oem_support }}"
+      orion_node_comments: "{{ orion_node_comments }}"
+      orion_node_bau_handover_date: "{{ orion_node_bau_handover_date }}"
+      orion_node_project_manager: "{{ orion_node_project_manager }}"
+      orion_node_approval_state: 3
+
+  tasks:
+    - name: Convert serial numbers into a list
+      set_fact:
+        serial_numbers: "{{ employee_data.orion_node_serial_no.split(',') }}"
+
+    - name: Insert data into MySQL with separate rows for each serial number
+      mysql_query:
+        login_host: "{{ mysql_hostname }}"
+        login_port: "{{ mysql_port }}"
+        login_user: "{{ mysql_root_user }}"
+        login_password: "{{ mysql_root_password }}"
+        login_db: "{{ mysql_db_name }}"
+        query: >
+          INSERT INTO {{ mysql_table_name }} (
+            ip_address, hostname, polling_method, sys_name, machine_name, vendor_name, warranty_expiry_date, serial_no, 
+            site_code, site_priority, vendor_hw_support_contract, implementation_date, 
+            tp_support_contract_start_date, tp_support_contract_end_date, model_no, os, status, cmdb_updated, 
+            cmdb_ci_category, app_owner_ci_category, application_name, application_owner, monitored, monitoring_tool, 
+            ci_owner, support_group, approval_group, source, source_reference, source_value, po_number, eosl_oem, 
+            eol_bd_contract, eol_oem, oem_support, comments, bau_handover_date, project_manager, approval_state
+          ) VALUES (
+            '{{ employee_data.orion_node_ip_address }}', '{{ employee_data.orion_node_caption_name }}',
+            '{{ employee_data.orion_node_polling_method }}', '{{ employee_data.orion_node_sys_name }}',
+            '{{ employee_data.orion_node_machine_name }}', '{{ employee_data.orion_node_vendor_name }}',
+            '{{ employee_data.orion_node_warranty_expiry_date }}', '{{ item }}',
+            '{{ employee_data.orion_node_site_code }}', '{{ employee_data.orion_node_site_priority }}',
+            '{{ employee_data.orion_node_vendor_hw_support_contract }}', '{{ employee_data.orion_node_implementation_date }}',
+            '{{ employee_data.orion_node_tp_support_contract_start_date }}', '{{ employee_data.orion_node_tp_support_contract_end_date }}',
+            '{{ employee_data.orion_node_model_no }}', '{{ employee_data.orion_node_os }}', '{{ employee_data.orion_node_status }}',
+            '{{ employee_data.orion_node_cmdb_updated }}', '{{ employee_data.orion_node_cmdb_ci_category }}',
+            '{{ employee_data.orion_node_app_owner_ci_category }}', '{{ employee_data.orion_node_application_name }}',
+            '{{ employee_data.orion_node_application_owner }}', '{{ employee_data.orion_node_monitored }}',
+            '{{ employee_data.orion_node_monitoring_tool }}', '{{ employee_data.orion_node_ci_owner }}',
+            '{{ employee_data.orion_node_support_group }}', '{{ employee_data.orion_node_approval_group }}',
+            '{{ employee_data.orion_node_source }}', '{{ employee_data.orion_node_source_reference }}',
+            '{{ employee_data.orion_node_source_value }}', '{{ employee_data.orion_node_po_number }}',
+            '{{ employee_data.orion_node_eosl_oem }}', '{{ employee_data.orion_node_eol_bd_contract }}',
+            '{{ employee_data.orion_node_eol_oem }}', '{{ employee_data.orion_node_oem_support }}',
+            '{{ employee_data.orion_node_comments }}', '{{ employee_data.orion_node_bau_handover_date }}',
+            '{{ employee_data.orion_node_project_manager }}', '{{ employee_data.orion_node_approval_state }}'
+          )
+      loop: "{{ serial_numbers }}"
+      register: query_result
+
+    - name: Output query results
+      debug:
+        var: query_result.results
