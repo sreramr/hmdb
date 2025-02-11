@@ -77,7 +77,7 @@
             '{{ employee_data.orion_node_ip_address }}', '{{ employee_data.orion_node_caption_name }}', 
             '{{ employee_data.orion_node_machine_name }}', '{{ employee_data.orion_node_vendor_name }}', '{{ employee_data.orion_node_warranty_expiry_date }}',
             '{{ employee_data.orion_node_device_company }}', '{{ employee_data.orion_node_device_criticality }}', '{{ employee_data.orion_node_device_location }}',
-            '{{ employee_data.orion_node_tower }}', '{{ employee_data.orion_node_track }}', '{{ employee_data.orion_node_serial_no }}', '{{ employee_data.orion_node_site_code }}', '{{ employee_data.orion_node_site_priority }}', 
+            '{{ employee_data.orion_node_tower }}', '{{ employee_data.orion_node_track }}', '{{ item }}', '{{ employee_data.orion_node_site_code }}', '{{ employee_data.orion_node_site_priority }}', 
             '{{ employee_data.orion_node_vendor_hw_support_contract }}', '{{ employee_data.orion_node_implementation_date }}', '{{ employee_data.orion_node_tp_support_contract_start_date }}', 
             '{{ employee_data.orion_node_tp_support_contract_end_date }}', '{{ employee_data.orion_node_model_no }}', '{{ employee_data.orion_node_os }}', '{{ employee_data.orion_node_status }}', 
             '{{ employee_data.orion_node_cmdb_updated }}', '{{ employee_data.orion_node_cmdb_ci_category }}', '{{ employee_data.orion_node_app_owner_ci_category }}', '{{ employee_data.orion_node_application_name }}', 
